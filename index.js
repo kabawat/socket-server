@@ -10,7 +10,11 @@ const corsOpetion = {
 }
 app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
-app.use(cors())
+app.use(cors(
+    {
+        origin: 'https://socket-client.onrender.com/'
+    }
+))
 
 app.get('/', (req, res) => {
     res.send("hello word")
