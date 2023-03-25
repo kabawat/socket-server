@@ -4,9 +4,9 @@ const { Server } = require('socket.io')
 const http = require('http')
 const cors = require('cors')
 const not = require('dotenv').config()
-const port = process.env.port
+const port = process.env.port || 2917
 const corsOpetion = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://socket-client.onrender.com/'],
 }
 app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
