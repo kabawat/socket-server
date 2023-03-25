@@ -22,7 +22,9 @@ app.get('/', (req, res) => {
 
 const server = http.createServer(app)
 const io = new Server(server, {
-    cors: corsOpetion
+    cors: {
+        origin: ['http://localhost:3000', 'https://socket-client.onrender.com']
+    }
 })
 
 io.on("connection", (socket) => {
