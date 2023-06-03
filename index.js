@@ -5,6 +5,7 @@ const http = require('http')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
 const router = require('./router')
+const path = require('path')
 const not = require('dotenv').config()
 const port = process.env.port || 2917
 const corsOpetion = {
