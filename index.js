@@ -8,13 +8,13 @@ const router = require('./router')
 const not = require('dotenv').config()
 const port = process.env.port || 2917
 const corsOpetion = {
-    origin: ['http://localhost:3000', 'https://socket-client.onrender.com/'],
+    origin: ['http://localhost:3000', 'https://socket-client.onrender.com'],
 }
 app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
 app.use(cors(
     {
-        origin: 'https://socket-client.onrender.com/'
+        origin: 'https://socket-client.onrender.com'
     }
 ))
 app.use(fileUpload())
