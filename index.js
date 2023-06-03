@@ -12,6 +12,7 @@ const corsOpetion = {
 }
 app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
+app.use('/', exress.static(path.join(__dirname, 'public/')))
 app.use(cors(
     {
         origin: 'https://socket-client.onrender.com'
@@ -22,7 +23,6 @@ app.get('/', (req, res) => {
     res.send("hello word")
 })
 app.use(router)
-
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
