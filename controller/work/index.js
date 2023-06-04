@@ -1,10 +1,12 @@
 const { recentWorkModel } = require('../')
 const path = require('path')
+
 function convertToSlug(string) {
     var charactersToRemove = /[/!@#$%^&*()?.,\s]/g;
     var cleanedString = string.replace(charactersToRemove, "");
     return cleanedString.slice(0, 10);
 }
+
 async function work(req, res) {
     const { heading, url } = req.body
     const { logo, thumbnail } = req.files
@@ -37,6 +39,8 @@ async function work(req, res) {
         }
         logo.mv(logo_saveFile);
         thumbnail.mv(thumbnail_saveFile);
+
+        res.setHeader('Access-Control-Allow-Origin', 'https://socket-client.onrender.com');
         res.status(200).json({
             status: true,
             message: "success",
@@ -55,4 +59,5 @@ async function work(req, res) {
         })
     }
 }
+
 module.exports = work   
