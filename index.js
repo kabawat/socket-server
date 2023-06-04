@@ -8,9 +8,6 @@ const router = require('./router')
 const path = require('path')
 const not = require('dotenv').config()
 const port = process.env.port || 2917
-const corsOpetion = {
-    origin: ['http://localhost:3000', 'https://socket-client.onrender.com'],
-}
 app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
 app.use(cors(
@@ -18,23 +15,18 @@ app.use(cors(
         origin: 'https://socket-client.onrender.com'
     }
 ))
+app.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(fileUpload())
 app.get('/', (req, res) => {
     res.send("hello word")
 })
-app.use(router)
 app.use('/', exress.static(path.join(__dirname, 'public/')))
+app.use(router)
 const server = http.createServer(app)
-const io = new Server(server, {
-    cors: {
-        origin: ['http://localhost:3000', 'https://socket-client.onrender.com']
-    }
-})
-
-io.on("connection", (socket) => {
-    console.log(socket.id)
-})
-
 server.listen(port, () => {
     console.log(`http://localhost:${port}`)
 })
