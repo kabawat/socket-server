@@ -11,14 +11,16 @@ app.use(exress.urlencoded({ extended: true }))
 app.use(exress.json())
 app.use(cors(
     {
-        origin: 'https://socket-client.onrender.com'
+        origin: 'https://socket-client.onrender.com/'
     }
 ))
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://socket-client.onrender.com/');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
 app.use(fileUpload())
 app.get('/', (req, res) => {
     res.send("hello word")
